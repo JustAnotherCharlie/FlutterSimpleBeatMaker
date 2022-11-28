@@ -18,14 +18,35 @@ class DashboardViewState extends State<DashboardView> {
 
   // Every class variable that we define within our State class global scope
   // will be part of our view state.
-  bool beatPlaying = false;
+  bool _beatPlaying = false;
+
+  final List _notes = [
+    [false, false, false, false],
+    [false, false, false, false],
+    [false, false, false, false]
+  ];
 
   void _onMainButtonClick() {
     // The setStateMethod allows us to update a class scope value and then
     // update UI with the new values.
     setState(() {
-      beatPlaying = !beatPlaying;
+      _beatPlaying = !_beatPlaying;
     });
+  }
+
+  void _onControllerPillCLick(int controllerIndex, int noteIndex) {
+    setState(() {
+      _notes[controllerIndex][noteIndex] = !_notes[controllerIndex][noteIndex];
+    });
+  }
+
+  Widget _getInstrumentController(String label, int index) {
+    return BeatControllerWidget(
+        label: label,
+        pillsState: _notes[index],
+        controllerIndex: index,
+        updateControllerState: _onControllerPillCLick
+    );
   }
 
   // The build method will be executed when the Widget is created for the first
@@ -34,11 +55,12 @@ class DashboardViewState extends State<DashboardView> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        BeatControllerWidget(label: "Kick Drum"),
-        Text(beatPlaying ? "Playing Beat" : "Not Playing Beat"),
+        _getInstrumentController("Kick Drum", 0),
+        _getInstrumentController("Snare Drum", 1),
+        _getInstrumentController("Hi-Hat", 2),
         MaterialButton(
           onPressed: _onMainButtonClick,
-          child: const Text("Press Me"),
+          child: Text(_beatPlaying ? "Playing Beat" : "Not Playing Beat"),
         )
       ],
     );

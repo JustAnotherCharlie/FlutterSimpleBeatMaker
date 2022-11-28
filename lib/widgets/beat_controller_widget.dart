@@ -7,15 +7,21 @@ class BeatControllerWidget extends StatelessWidget {
 
   // We define the required parameters for our BeatController object.
   final String label;
+  final List pillsState;
+  final int controllerIndex;
+  final Function(int controllerIndex, int noteIndex) updateControllerState;
 
   const BeatControllerWidget({
     Key? key,
-    required this.label
+    required this.label,
+    required this.pillsState,
+    required this.controllerIndex,
+    required this.updateControllerState
   }) : super(key: key);
 
   // Since we want to add the same note pill multiple times, we can extract
   // portions of code to make our component a bit more modular and readable.
-  Widget _getNotePill() {
+  Widget _getNotePill(int pillIndex) {
     // To apply a borderRadius with flutter we can use the BorderRadius class
     // which receives a Radius object which applies a shape modifier with a
     // radius value.
@@ -25,10 +31,11 @@ class BeatControllerWidget extends StatelessWidget {
     // padding, margin, radius are available only to a selected amount
     // of widgets.
     return Material(
+      color: pillsState[pillIndex] ? Colors.white : Colors.white.withOpacity(0.5),
       borderRadius: borderRadius,
       child: InkWell(
         borderRadius: borderRadius,
-        onTap: () {},
+        onTap:() { updateControllerState(controllerIndex, pillIndex); },
         child: const SizedBox(
           height: 30,
           width: 60,
@@ -59,10 +66,10 @@ class BeatControllerWidget extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                _getNotePill(),
-                _getNotePill(),
-                _getNotePill(),
-                _getNotePill(),
+                _getNotePill(0),
+                _getNotePill(1),
+                _getNotePill(2),
+                _getNotePill(3),
               ],
             ),
           )
