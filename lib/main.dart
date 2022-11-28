@@ -1,5 +1,6 @@
 // Import Flutter required package
 import 'package:flutter/material.dart';
+import 'package:workshop/views/dashboard_view.dart';
 
 // Dart code entry function
 void main() {
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       home: Scaffold(
         body: SafeArea(
-          child: Text("My First Flutter Application")
+          child: DashboardView()
         ),
       ),
     );
