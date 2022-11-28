@@ -27,6 +27,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       title: 'Flutter Demo',
       home: Scaffold(
+        backgroundColor: Color(0xff271F57),
         body: SafeArea(
           child: DashboardView()
         ),

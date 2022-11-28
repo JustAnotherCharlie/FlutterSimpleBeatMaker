@@ -55,11 +55,11 @@ class BeatControllerWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(label),
+          Text(label, style: const TextStyle(color: Colors.white)),
           const SizedBox(height: 10),
           Container(
             decoration: const BoxDecoration(
-              color: Colors.red,
+              color: Color(0xff4D44AE),
               borderRadius: BorderRadius.all(Radius.circular(10))
             ),
             padding: const EdgeInsets.all(15),

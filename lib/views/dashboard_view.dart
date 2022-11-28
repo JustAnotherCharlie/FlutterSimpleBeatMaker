@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:workshop/widgets/beat_controller_widget.dart';
+import 'package:workshop/widgets/header_widget.dart';
 
 // Our main view (The Dashboard) extends from the StatefulWidget class since
 // we are going to be managing our app state from within here.
@@ -92,19 +93,44 @@ class DashboardViewState extends State<DashboardView> {
     );
   }
 
+  Widget _getActionButtonWidget() {
+    return Container(
+      width: double.infinity,
+      height: 80,
+      decoration: const BoxDecoration(
+          color: Color(0xff06002B),
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20)
+          )
+      ),
+      child: MaterialButton(
+        onPressed: _onMainButtonClick,
+        child: Text(
+          _beatPlaying ? "Playing Beat" : "Not Playing Beat",
+          style: const TextStyle(color: Colors.white),
+        ),
+      ),
+    );
+  }
+
   // The build method will be executed when the Widget is created for the first
   // time and everytime a State value is updated through the setState method.
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        _getInstrumentController("Kick Drum", 0),
-        _getInstrumentController("Snare Drum", 1),
-        _getInstrumentController("Hi-Hat", 2),
-        MaterialButton(
-          onPressed: _onMainButtonClick,
-          child: Text(_beatPlaying ? "Playing Beat" : "Not Playing Beat"),
-        )
+        const HeaderWidget(),
+        Expanded(
+          child: Column(
+            children: [
+              _getInstrumentController("Kick Drum", 0),
+              _getInstrumentController("Snare Drum", 1),
+              _getInstrumentController("Hi-Hat", 2),
+            ],
+          )
+        ),
+        _getActionButtonWidget()
       ],
     );
   }

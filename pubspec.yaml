@@ -66,6 +66,7 @@ flutter:
   #   - images/a_dot_ham.jpeg
 
   assets:
+    - assets/ic_rhythm.png
     - assets/snd_hi_hat.wav
     - assets/snd_kick_drum.wav
     - assets/snd_snare_drum.wav
