@@ -121,6 +121,9 @@ class DashboardViewState extends State<DashboardView> {
     return Column(
       children: [
         const HeaderWidget(),
+        // When using a Column and we want a single item to take the available
+        // unused space, we can use an Expanded Widget which will fill any
+        // available space in the screen respecting the parent restrictions.
         Expanded(
           child: Column(
             children: [
