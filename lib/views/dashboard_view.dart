@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:workshop/widgets/beat_controller_widget.dart';
 
 // Our main view (The Dashboard) extends from the StatefulWidget class since
 // we are going to be managing our app state from within here.
@@ -33,6 +34,7 @@ class DashboardViewState extends State<DashboardView> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        BeatControllerWidget(label: "Kick Drum"),
         Text(beatPlaying ? "Playing Beat" : "Not Playing Beat"),
         MaterialButton(
           onPressed: _onMainButtonClick,
